@@ -1,0 +1,15 @@
+*~
+init.el
+abbrev_defs
+auto-save-list/
+autosaves/
+bookmarks
+elpa/
+helm-adaptive-history
+init.elc
+init.tex
+plantuml.jar
+projectile-bookmarks.eld
+recentf
+transient/
+url/
