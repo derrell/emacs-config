@@ -251,7 +251,7 @@
      (setq ns-pop-up-frames nil
            mac-option-modifier nil
            mac-command-modifier 'meta
-           x-select-enable-clipboard t)
+           select-enable-clipboard t)
      (exec-path-from-shell-initialize)
      (when (fboundp 'mac-auto-operator-composition-mode)
        (mac-auto-operator-composition-mode 1)))
@@ -2344,9 +2344,9 @@
                                               ; control the region.
         (setq mouse-drag-copy-region nil)  ; stops selection with a mouse being
                                               ; immediately injected to the kill ring
-        (setq x-select-enable-primary nil)  ; stops killing/yanking interacting
+        (setq select-enable-primary nil)  ; stops killing/yanking interacting
                                               ; with primary X11 selection
-        (setq x-select-enable-clipboard t)  ; makes killing/yanking interact with
+        (setq select-enable-clipboard t)  ; makes killing/yanking interact with
                                               ; clipboard X11 selection
 
                                               ; You need an emacs with bug #902 fixed for this to work properly. It has
@@ -2690,7 +2690,7 @@ Open up a new window. We're nearly done.
   (add-to-list 'org-latex-packages-alist '("" "minted"))
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((shell . t) (python . t) (C . t) (ruby . t) (js . t)) (ditaa . t))
+   '((shell . t) (python . t) (C . t) (ruby . t) (js . t) (ditaa . t)))
   (setq
    org-latex-pdf-process
    '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
