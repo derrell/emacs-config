@@ -2626,20 +2626,21 @@ Open up a new window. We're nearly done.
    org-enforce-todo-dependencies t
    org-agenda-start-day "+0d"
    org-agenda-span 3
+   org-catch-invisible-edits 'smart
    org-capture-templates
    '(      
      ("c" "Comment"
       entry (file org-default-notes-file)
       "* %?   %u\n")
-   
+
      ("t" "Todo"
       entry (file org-default-notes-file)
       "* TODO %?   %u\n")
-   
+
      ("l" "Todo w/ Context link and region"
       entry (file org-default-notes-file)
       "* TODO %? %U\n  %i\n  Link: %a")
-   
+
      ("m" "Minimal note"
       entry (file org-default-notes-file)
       "* %?") 
