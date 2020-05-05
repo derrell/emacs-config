@@ -889,6 +889,8 @@
    does not remove anything. In Emacs removing stuff is less of a worry,
    since we can always undo!
 
+   djl: not currently used in key bindings below
+
    #+BEGIN_SRC emacs-lisp
    (defun clear-comint ()
      "Runs `comint-truncate-buffer' with the
@@ -1306,7 +1308,7 @@
    (define-key custom-bindings-map (kbd "M-]")         'other-frame)
    (define-key custom-bindings-map (kbd "C-j")         'newline-and-indent)
    (define-key custom-bindings-map (kbd "C-c s")       'ispell-word)
-   (define-key comint-mode-map     (kbd "C-l")         'clear-comint)
+;;   (define-key comint-mode-map     (kbd "C-l")         'clear-comint)
    #+END_SRC
 
 ** Bindings for functions defined [[sec:defuns][above]].

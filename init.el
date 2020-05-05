@@ -666,12 +666,12 @@ math-block around the region."
   (define-key cider-repl-mode-map (kbd "C-l") 'cider-repl-clear-buffer))
 
 (define-key custom-bindings-map (kbd "M-u")         'upcase-dwim)
-(define-key custom-bindings-map (kbd "M-c")         'capitalize-dwim)
-(define-key custom-bindings-map (kbd "M-l")         'downcase-dwim)
-(define-key custom-bindings-map (kbd "M-]")         'other-frame)
-(define-key custom-bindings-map (kbd "C-j")         'newline-and-indent)
-(define-key custom-bindings-map (kbd "C-c s")       'ispell-word)
-(define-key comint-mode-map     (kbd "C-l")         'clear-comint)
+   (define-key custom-bindings-map (kbd "M-c")         'capitalize-dwim)
+   (define-key custom-bindings-map (kbd "M-l")         'downcase-dwim)
+   (define-key custom-bindings-map (kbd "M-]")         'other-frame)
+   (define-key custom-bindings-map (kbd "C-j")         'newline-and-indent)
+   (define-key custom-bindings-map (kbd "C-c s")       'ispell-word)
+;;   (define-key comint-mode-map     (kbd "C-l")         'clear-comint)
 
 (define-key global-map          (kbd "M-p")     'jump-to-previous-like-this)
 (define-key global-map          (kbd "M-n")     'jump-to-next-like-this)
