@@ -65,6 +65,7 @@ tangled, and the tangled file is compiled."
           helm-swoop            ; Efficiently hopping squeezed lines
           jedi                  ; Python auto-completion for Emacs
           js2-mode              ; Improved JavaScript editing mode
+          leuven-theme          ; djl added
           magit                 ; control Git from Emacs
           markdown-mode         ; Emacs Major mode for Markdown-formatted files
 ;;             maude-mode           ; Emacs mode for the programming language Maude
@@ -83,6 +84,7 @@ tangled, and the tangled file is compiled."
           racket-mode                   ; Major mode for Racket language
           real-auto-save                ; djl added
 ;;             slime                ; Superior Lisp Interaction Mode for Emacs
+          tango-plus-theme       ; djl added
           try                          ; Try out Emacs packages
           which-key)))                 ; Display available keybindings in popup
   (when (memq window-system '(mac ns))
@@ -177,11 +179,28 @@ tangled, and the tangled file is compiled."
   (eval-after-load 'auto-compile
     '((auto-compile-on-save-mode 1))))  ; compile .el files on save
 
-(load-theme 'doom-one-light t)
+(defun set-git-gutter-colors ()
+  "Set the colors to use for changes (per git) in the gutter"
+  (dolist (p '((git-gutter:added    . "#0c0")
+               (git-gutter:deleted  . "#c00")
+               (git-gutter:modified . "#c0c")))
+    (set-face-foreground (car p) (cdr p))
+    (set-face-background (car p) (cdr p))))
+
+
+(if
+    ;; (load-theme 'light-blue t)
+    (load-theme 'tango-plus t)
+    ;; (load-theme 'whiteboard t)
+    ;; (load-theme 'leuven t)
+    ;; (load-theme 'doom-one-light t)
+    (set-git-gutter-colors))
 
 (defun cycle-themes ()
   "Returns a function that lets you cycle your themes."
-  (lexical-let ((themes '#1=(doom-one-light doom-one . #1#)))
+  (lexical-let
+      ((themes
+        '#1=(light-blue tango-plus leuven whiteboard doom-one-light doom-one . #1#)))
     (lambda ()
       (interactive)
       ;; Rotates the thme cycle and changes the current theme.
@@ -205,11 +224,7 @@ tangled, and the tangled file is compiled."
 (safe-diminish "paredit" 'paredit-mode "()")
 
 (with-eval-after-load 'git-gutter-fringe
-  (dolist (p '((git-gutter:added    . "#0c0")
-               (git-gutter:deleted  . "#c00")
-               (git-gutter:modified . "#c0c")))
-    (set-face-foreground (car p) (cdr p))
-    (set-face-background (car p) (cdr p))))
+  (set-git-gutter-colors))
 
 (setq-default prettify-symbols-alist '(("lambda" . ?λ)
                                        ("delta" . ?Δ)
@@ -772,6 +787,7 @@ math-block around the region."
 
 (defun js-mode-hooker ()
       ;;; js2-mode key bindings
+  (auto-fill-mode 0)         ; no auto-fill mode in shell mode
   (define-key js2-mode-map "\M-{"
     (lambda (arg)
       (interactive "P")
