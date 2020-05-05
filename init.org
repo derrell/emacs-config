@@ -185,48 +185,48 @@
    #+BEGIN_SRC emacs-lisp
    (let* ((package--builtins nil)
           (packages
-           '(auto-compile         ; automatically compile Emacs Lisp libraries
-                                           ;             cider                ; Clojure Interactive Development Environment
-                                           ;             clj-refactor         ; Commands for refactoring Clojure code
-                                           ;             company              ; Modular text completion framework
-                                           ;             company-coq          ; A collection of extensions PG's Coq mode
-             define-word          ; display the definition of word at point
-             diminish             ; Diminished modes from modeline
-             doom-themes          ; An opinionated pack of modern color-themes
-             erlang               ; Erlang major mode
-                                           ;             expand-region        ; Increase selected region by semantic units
-             focus                ; Dim color of text in surrounding sections
-             git-gutter-fringe    ; Fringe version of git-gutter.el
-             golden-ratio         ; Automatic resizing windows to golden ratio
-             haskell-mode         ; A Haskell editing mode
-             helm                 ; Incremental and narrowing framework
-             helm-ag              ; the silver searcher with helm interface
-                                           ;             helm-company         ; Helm interface for company-mode
-             helm-dash            ; Offline documentation using Dash docsets.
-             helm-projectile      ; Helm integration for Projectile
-             helm-swoop           ; Efficiently hopping squeezed lines
-             jedi                 ; Python auto-completion for Emacs
-             js2-mode             ; Improved JavaScript editing mode
-             magit                ; control Git from Emacs
-             markdown-mode        ; Emacs Major mode for Markdown-formatted files
-                                           ;             maude-mode           ; Emacs mode for the programming language Maude
-                                           ;             minizinc-mode        ; Major mode for MiniZinc code
-                                           ;             multiple-cursors     ; Multiple cursors for Emacs
-                                           ;             olivetti             ; Minor mode for a nice writing environment
-             org                  ; Outline-based notes management and organizer
-             org-bullets          ; Show bullets in org-mode as UTF-8 characters
-             org-ref              ; citations bibliographies in org-mode
-             org-super-agenda     ; djl: suggested by Reed
-             paredit              ; minor mode for editing parentheses
-             pdf-tools            ; Emacs support library for PDF files
-             plantuml-mode        ; djl added
-             projectile           ; Manage and navigate projects in Emacs easily
-                                           ;             proof-general        ; A generic Emacs interface for proof assistants
-             racket-mode          ; Major mode for Racket language
-             real-auto-save       ; djl added
-                                           ;             slime                ; Superior Lisp Interaction Mode for Emacs
-             try                  ; Try out Emacs packages
-             which-key)))         ; Display available keybindings in popup
+           '(auto-compile             ; automatically compile Emacs Lisp libraries
+   ;;             cider                ; Clojure Interactive Development Environment
+   ;;             clj-refactor         ; Commands for refactoring Clojure code
+   ;;             company              ; Modular text completion framework
+   ;;             company-coq          ; A collection of extensions PG's Coq mode
+             define-word              ; display the definition of word at point
+             diminish                 ; Diminished modes from modeline
+             doom-themes              ; An opinionated pack of modern color-themes
+             erlang                   ; Erlang major mode
+   ;;             expand-region        ; Increase selected region by semantic units
+             focus                    ; Dim color of text in surrounding sections
+             git-gutter-fringe        ; Fringe version of git-gutter.el
+             golden-ratio             ; Automatic resizing windows to golden ratio
+             haskell-mode             ; A Haskell editing mode
+             helm                     ; Incremental and narrowing framework
+             helm-ag                  ; the silver searcher with helm interface
+   ;;             helm-company         ; Helm interface for company-mode
+             helm-dash             ; Offline documentation using Dash docsets.
+             helm-projectile       ; Helm integration for Projectile
+             helm-swoop            ; Efficiently hopping squeezed lines
+             jedi                  ; Python auto-completion for Emacs
+             js2-mode              ; Improved JavaScript editing mode
+             magit                 ; control Git from Emacs
+             markdown-mode         ; Emacs Major mode for Markdown-formatted files
+   ;;             maude-mode           ; Emacs mode for the programming language Maude
+   ;;             minizinc-mode        ; Major mode for MiniZinc code
+   ;;             multiple-cursors     ; Multiple cursors for Emacs
+   ;;             olivetti             ; Minor mode for a nice writing environment
+             org                    ; Outline-based notes management and organizer
+             org-bullets            ; Show bullets in org-mode as UTF-8 characters
+             org-ref                ; citations bibliographies in org-mode
+             org-super-agenda       ; djl: suggested by Reed
+             paredit                ; minor mode for editing parentheses
+             pdf-tools              ; Emacs support library for PDF files
+             plantuml-mode          ; djl added
+             projectile             ; Manage and navigate projects in Emacs easily
+   ;;             proof-general        ; A generic Emacs interface for proof assistants
+             racket-mode                   ; Major mode for Racket language
+             real-auto-save                ; djl added
+   ;;             slime                ; Superior Lisp Interaction Mode for Emacs
+             try                          ; Try out Emacs packages
+             which-key)))                 ; Display available keybindings in popup
      (when (memq window-system '(mac ns))
        (push 'exec-path-from-shell packages)
        (push 'reveal-in-osx-finder packages))
@@ -271,7 +271,7 @@
          inhibit-startup-screen t          ; No splash screen please
          initial-scratch-message nil       ; Clean scratch buffer
          recentf-max-saved-items 100       ; Show more recent files
-         ring-bell-function 'ignore        ; Quiet
+;;         ring-bell-function 'ignore        ; Quiet
          scroll-margin 1                   ; Space between cursor and top/bottom
          sentence-end-double-space nil)    ; No double space
    ;; Some mac-bindings interfere with Emacs bindings.
@@ -286,7 +286,8 @@
    #+BEGIN_SRC emacs-lisp
    (setq-default tab-width 4                       ; Smaller tabs
                  fill-column 79                    ; Maximum line width
-                 truncate-lines t                  ; Don't fold lines
+                 truncate-lines nil                ; Don't fold lines...
+                 truncate-partial-width-windows nil; ... even in narrow windows
                  indent-tabs-mode nil              ; Use spaces instead of tabs
                  split-width-threshold 160         ; Split verticly by default
                  split-height-threshold nil        ; Split verticly by default
@@ -609,10 +610,10 @@
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
-   (defadvice flyspell-prog-mode (before check nil activate)
-     "Turns on flyspell only if a spell-checking tool is installed."
-     (when (executable-find ispell-program-name)
-       (local-set-key (kbd "C-c l") (cycle-languages))))
+   ;; (defadvice flyspell-prog-mode (before check nil activate)
+   ;;   "Turns on flyspell only if a spell-checking tool is installed."
+   ;;   (when (executable-find ispell-program-name)
+   ;;     (local-set-key (kbd "C-c l") (cycle-languages))))
    #+END_SRC
 
 ** Org
@@ -2338,7 +2339,7 @@
         ;;; Make emacs use the X11 clipboard
         ;;;
 
-        (transient-mark-mode 0)    ; Now on by default: makes the region act quite
+        (transient-mark-mode 1)    ; Now on by default: makes the region act quite
                                               ; like the text "highlight" in many apps.  (setq
         ;; shift-select-mode t)    ; Now on by default: allows shifted cursor-keys to
                                               ; control the region.
@@ -2455,7 +2456,10 @@
                                           (message ""))))
         (define-key Local-map "\C-Q" 'quoted-insert)
         (define-key Local-map "\C-R" 'rename-buffer)
-        (define-key Local-map "\C-S" 'shell)
+        (define-key Local-map "\C-S" '(lambda ()
+                                        (interactive)
+                                        (beep)
+                                        (message "Use M-1 - M-9 instead")))
         (define-key Local-map "\C-V" 'x-yank-clipboard-selection)
         (define-key Local-map "\C-W" 'kill-region)
    ;;     (define-key Local-map "\C-X" 'x-kill-primary-selection)
