@@ -157,8 +157,9 @@ tangled, and the tangled file is compiled."
 
 (dolist (mode
          '(tool-bar-mode                ; No toolbars, more room for text
-           scroll-bar-mode              ; No scroll bars either
-           blink-cursor-mode))          ; The blinking cursor gets old
+;;           scroll-bar-mode              ; No scroll bars either
+           blink-cursor-mode)
+         )          ; The blinking cursor gets old
   (funcall mode 0))
 
 (dolist (mode
@@ -166,7 +167,7 @@ tangled, and the tangled file is compiled."
            column-number-mode           ; Show column number in mode line
            delete-selection-mode        ; Replace selected text
            dirtrack-mode                ; directory tracking in *shell*
-                                        ;djl global-company-mode          ; Auto-completion everywhere
+           ;;djl global-company-mode          ; Auto-completion everywhere
            global-git-gutter-mode       ; Show changes latest commit
            global-prettify-symbols-mode ; Greek letters should look greek
            projectile-mode              ; Manage and navigate projects
@@ -284,7 +285,7 @@ tangled, and the tangled file is compiled."
 
 (add-hook 'text-mode-hook 'turn-on-flyspell)
 
-(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+;;djl (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 (defun cycle-languages ()
   "Changes the ispell dictionary to the first element in
@@ -948,7 +949,7 @@ math-block around the region."
  find-file-hooks             (list 'find-file-hooker)
  mail-mode-hook              'mail-mode-hooker
  mail-setup-hook             'mail-setup-hooker
- shell-mode-hook             'shell-mode-hooker
+ shell-mode-hook             (list 'shell-mode-hooker)
  shell-selected-hook         'shell-selected-hooker
  c-mode-hook                 'c-mode-hooker
  c++-mode-hook               'c++-mode-hooker
