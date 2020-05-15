@@ -157,6 +157,7 @@ tangled, and the tangled file is compiled."
 
 (dolist (mode
          '(tool-bar-mode                ; No toolbars, more room for text
+           menu-bar-mode                ; No menubars either
 ;;           scroll-bar-mode              ; No scroll bars either
            blink-cursor-mode)
          )          ; The blinking cursor gets old
@@ -1897,15 +1898,21 @@ Intended as :around advice."
                                           org-default-notes-file)))
 (setq
  org-default-notes-file "/home/derrell/ME/SyncThing/Inbox.org"
+ org-refile-targets '((org-agenda-files :maxlevel . 2))
+ org-catch-invisible-edits 'smart
  org-agenda-files
  '("~/ME/SyncThing/Inbox.org"
    "~/ME/SyncThing/Work.org"
    "~/ME/SyncThing/Play.org")
- org-refile-targets '((org-agenda-files :maxlevel . 2))
  org-enforce-todo-dependencies t
  org-agenda-start-day "+0d"
  org-agenda-span 3
- org-catch-invisible-edits 'smart
+ org-agenda-custom-commands
+      '(("n" "Agenda and all TODOs"
+        ((agenda #1="")
+         (alltodo #1#)
+         (stuck #1#)
+         )))
  org-capture-templates
  '(      
    ("c" "Comment"
