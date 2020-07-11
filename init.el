@@ -1964,8 +1964,15 @@ Intended as :around advice."
 (add-to-list 'org-latex-packages-alist '("" "minted"))
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((shell . t) (python . t) (C . t) (ruby . t) (js . t) (ditaa . t)))
+ '((shell . t)
+   (python . t)
+   (C . t)
+   (ruby . t)
+   (js . t)
+   (ditaa . t)
+   ))
 (setq
+ org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar"
  org-latex-pdf-process
  '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
    "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
