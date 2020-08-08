@@ -2648,7 +2648,8 @@ Open up a new window. We're nearly done.
    org-agenda-files
    '("~/ME/SyncThing/Inbox.org"
      "~/ME/SyncThing/Work.org"
-     "~/ME/SyncThing/Play.org")
+     "~/ME/SyncThing/Play.org"
+     "~/ME/SyncThing/Phone.org")
    org-enforce-todo-dependencies t
    org-agenda-start-day "+0d"
    org-agenda-span 3
@@ -2692,6 +2693,11 @@ Open up a new window. We're nearly done.
   ;;         :time-grid t)
   ;;        ))
   #+END_SRC
+
+  #+RESULTS:
+  | c | Comment                         | entry | (file org-default-notes-file) | * %?   %u      |
+  | t | Todo                            | entry | (file org-default-notes-file) | * TODO %?   %u |
+  | l | Todo w/ Context link and region | entry | (file org-default-notes-file) | * TODO %? %U   |
 
   Automatically revert =org-mode=-buffers when the file changes on disk.
 
