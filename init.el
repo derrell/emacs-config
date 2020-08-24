@@ -1903,7 +1903,9 @@ Intended as :around advice."
  org-agenda-files
  '("~/ME/SyncThing/Inbox.org"
    "~/ME/SyncThing/Work.org"
-   "~/ME/SyncThing/Play.org")
+   "~/ME/SyncThing/Play.org"
+   "~/ME/SyncThing/Phone.org"
+   "~/ME/SyncThing/Projects.org")
  org-enforce-todo-dependencies t
  org-agenda-start-day "+0d"
  org-agenda-span 3
