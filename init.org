@@ -2695,6 +2695,11 @@ Open up a new window. We're nearly done.
   ;;        ))
   #+END_SRC
 
+  #+RESULTS:
+  | c | Comment                         | entry | (file org-default-notes-file) | * %?   %u      |
+  | t | Todo                            | entry | (file org-default-notes-file) | * TODO %?   %u |
+  | l | Todo w/ Context link and region | entry | (file org-default-notes-file) | * TODO %? %U   |
+
   Automatically revert =org-mode=-buffers when the file changes on disk.
 
   #+BEGIN_SRC emacs-lisp
