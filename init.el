@@ -70,7 +70,7 @@ tangled, and the tangled file is compiled."
           markdown-mode         ; Emacs Major mode for Markdown-formatted files
 ;;             maude-mode           ; Emacs mode for the programming language Maude
 ;;             minizinc-mode        ; Major mode for MiniZinc code
-;;             multiple-cursors     ; Multiple cursors for Emacs
+          multiple-cursors     ; Multiple cursors for Emacs
 ;;             olivetti             ; Minor mode for a nice writing environment
           org                    ; Outline-based notes management and organizer
           org-bullets            ; Show bullets in org-mode as UTF-8 characters
@@ -1246,7 +1246,8 @@ Called from a program, takes two args: START and END."
          (message "   %s   Column %d    Character %d of %d    %s"
                   (what-line) (1+ (current-column)) pt (point-max) rgn)))
 
-(defun next-line (arg)  ;; eliminates eob insert of new line
+;;; eliminates eob insert of new line
+(defun next-line (arg &optional unused)
   (interactive "p")
   (line-move arg)
                                         ;  (next-line-internal arg)
@@ -1718,8 +1719,6 @@ and then edit that."
      (setq Local-map-per-user (make-keymap))
      (define-key Local-map "l" Local-map-per-user)
 
-                                           ; Too confusing.  Force me to go into news or read-mail prior to sending.
-                                           ; (define-key Local-map "m" 'other-or-make-gnus-window)
 
      (define-key Local-map "s" '(lambda ()
                                   (interactive)
@@ -1770,6 +1769,21 @@ and then edit that."
      (define-key Local-map "\M-%" 'query-replace-regexp)
      (define-key Local-map "\M-$" 'spell-buffer)
      (define-key Local-map "\M-\\" 'strip-leading-white-space)
+
+     (setq multiple-cursors-map (make-keymap))
+     (define-key multiple-cursors-map (kbd "a") 'mc/edit-lines)
+     (define-key multiple-cursors-map (kbd ">") 'mc/mark-next-like-this)
+     (define-key multiple-cursors-map (kbd ">") 'mc/mark-next-like-this)
+     (define-key multiple-cursors-map (kbd "<") 'mc/mark-previous-like-this)
+     (define-key multiple-cursors-map (kbd "=") 'mc/mark-all-like-this)
+     (define-key multiple-cursors-map (kbd "+") 'mc/mark-more-like-this-extended)
+
+     (define-key Local-map "m" multiple-cursors-map)
+
+
+     ;; windows-key+left-click adds a cursor
+     (global-unset-key (kbd "s-<down-mouse-1>"))
+     (global-set-key (kbd "s-<mouse-1>") 'mc/add-cursor-on-click)
      )
 
    (fset 'quit-command "\007")  ; Keyboard-quit doesn't quit in minibuffer

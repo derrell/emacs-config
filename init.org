@@ -212,7 +212,7 @@
              markdown-mode         ; Emacs Major mode for Markdown-formatted files
    ;;             maude-mode           ; Emacs mode for the programming language Maude
    ;;             minizinc-mode        ; Major mode for MiniZinc code
-   ;;             multiple-cursors     ; Multiple cursors for Emacs
+             multiple-cursors     ; Multiple cursors for Emacs
    ;;             olivetti             ; Minor mode for a nice writing environment
              org                    ; Outline-based notes management and organizer
              org-bullets            ; Show bullets in org-mode as UTF-8 characters
@@ -1811,258 +1811,259 @@
    #+END_SRC
 
    #+BEGIN_SRC emacs-lisp
-   (defun global-toggle-case-fold-search (arg)
-     (interactive "sSet default case-insensitivity for NEW buffers (T or F): ")
-     (if (or (equal arg "F") (equal arg "f"))
-         (setq-default case-fold-search nil)
-       (setq-default case-fold-search t)))
+    (defun global-toggle-case-fold-search (arg)
+      (interactive "sSet default case-insensitivity for NEW buffers (T or F): ")
+      (if (or (equal arg "F") (equal arg "f"))
+          (setq-default case-fold-search nil)
+        (setq-default case-fold-search t)))
 
-   (defun set-local-case-fold-search (arg)
-     "Set case-sensitivity for the current window."
+    (defun set-local-case-fold-search (arg)
+      "Set case-sensitivity for the current window."
 
-     (interactive "sSet case-insensitivity for current buffer (T or F): ")
-     (if (or (equal arg "F") (equal arg "f"))
-         (setq case-fold-search nil)
-       (setq case-fold-search t)))
+      (interactive "sSet case-insensitivity for current buffer (T or F): ")
+      (if (or (equal arg "F") (equal arg "f"))
+          (setq case-fold-search nil)
+        (setq case-fold-search t)))
 
-   ;;
-   ;; functions to move to a particular place.
-   ;;
+    ;;
+    ;; functions to move to a particular place.
+    ;;
 
-   (defun move-to-first-line-of-window (arg)
-     "move to the first line of the current window."
+    (defun move-to-first-line-of-window (arg)
+      "move to the first line of the current window."
 
-     (interactive "p")
-     (if (eq arg 4)
-         (move-to-window-line (/ (window-height) 4))
-       (move-to-window-line 0))
-     )
+      (interactive "p")
+      (if (eq arg 4)
+          (move-to-window-line (/ (window-height) 4))
+        (move-to-window-line 0))
+      )
 
-   (defun move-to-middle-of-window ()
-     "move to the middle of the current window."
+    (defun move-to-middle-of-window ()
+      "move to the middle of the current window."
 
-     (interactive)
-     (move-to-window-line (- (/ (window-height) 2) 1))
-     )
+      (interactive)
+      (move-to-window-line (- (/ (window-height) 2) 1))
+      )
 
-   (defun move-to-last-line-of-window (arg)
-     "move to the (almost) last line of the current window."
+    (defun move-to-last-line-of-window (arg)
+      "move to the (almost) last line of the current window."
 
-     (interactive "p")
-     (if (eq arg 4)
-         (move-to-window-line
-          (+ (/ (window-height) 2) (/ (window-height) 4)))
-       (move-to-window-line (- (window-height) 3))))
+      (interactive "p")
+      (if (eq arg 4)
+          (move-to-window-line
+           (+ (/ (window-height) 2) (/ (window-height) 4)))
+        (move-to-window-line (- (window-height) 3))))
 
-   (defun skip-66-forward ()
-     "skip forward 66 lines (one full page)."
+    (defun skip-66-forward ()
+      "skip forward 66 lines (one full page)."
 
-     (interactive)
-     (next-line 66))
+      (interactive)
+      (next-line 66))
 
-   (defun skip-66-backward ()
-     "skip backward 66 lines (one full page)."
+    (defun skip-66-backward ()
+      "skip backward 66 lines (one full page)."
 
-     (interactive)
-     (previous-line 66))
+      (interactive)
+      (previous-line 66))
 
-   ;;(defun insert-tab()
-   ;;  "Insert a tab charcter here."
-   ;;
-   ;;  (interactive)
-   ;;  (self-insert-command 1))
+    ;;(defun insert-tab()
+    ;;  "Insert a tab charcter here."
+    ;;
+    ;;  (interactive)
+    ;;  (self-insert-command 1))
 
-   (defun kill-1-line()
-     "Kill one whole line, regardless of whether it's empty or not"
+    (defun kill-1-line()
+      "Kill one whole line, regardless of whether it's empty or not"
 
-     (interactive)
-     (beginning-of-line)
-     (kill-line 1))
+      (interactive)
+      (beginning-of-line)
+      (kill-line 1))
 
-   (defun indent-buffer ()
-     "Indent each non-blank line in the buffer."
-     (interactive)
-     (indent-region-func (point-min) (point-max)))
+    (defun indent-buffer ()
+      "Indent each non-blank line in the buffer."
+      (interactive)
+      (indent-region-func (point-min) (point-max)))
 
-   (defun indent-region-func (start end)
-     "Indent each nonblank line in the region.
-   Called from a program, takes two args: START and END."
-     (interactive "r\nP")
-     (save-excursion
-       (goto-char end)
-       (setq numlines (count-lines start end))
-       (setq end (point-marker))
-       (goto-char start)
-       (setq curline 1)
-       (or (bolp) (forward-line 1))
-       (while (< (point) end)
-         (message "Indenting line %d of %d" curline numlines)
-         (funcall indent-line-function)
-         (forward-line 1)
-         (setq curline (1+ curline)))
-       (move-marker end nil)))
+    (defun indent-region-func (start end)
+      "Indent each nonblank line in the region.
+    Called from a program, takes two args: START and END."
+      (interactive "r\nP")
+      (save-excursion
+        (goto-char end)
+        (setq numlines (count-lines start end))
+        (setq end (point-marker))
+        (goto-char start)
+        (setq curline 1)
+        (or (bolp) (forward-line 1))
+        (while (< (point) end)
+          (message "Indenting line %d of %d" curline numlines)
+          (funcall indent-line-function)
+          (forward-line 1)
+          (setq curline (1+ curline)))
+        (move-marker end nil)))
 
-   (setq indent-region-function 'indent-region-func)
+    (setq indent-region-function 'indent-region-func)
 
-   (defun run-make(param)
-     "Run 'make'."
+    (defun run-make(param)
+      "Run 'make'."
 
-     (interactive "sCompile command: ")
-     (compile param)
-     (other-window 1)
-     (end-of-buffer)
-     (insert-string " "))
+      (interactive "sCompile command: ")
+      (compile param)
+      (other-window 1)
+      (end-of-buffer)
+      (insert-string " "))
 
-   (defun run-previous-compile()
-     "Run previous compile command"
+    (defun run-previous-compile()
+      "Run previous compile command"
 
-     (interactive)
-     (compile ""))
-
-
-   (defun ring-bell()
-     "Ring the terminal bell."
-
-     (interactive)
-     (beep)
-     (beep)
-     (beep))
+      (interactive)
+      (compile ""))
 
 
-   ;;
-   ;; ----------------------------------------------------------------------
-   ;; Confirm exit prior to exiting.
+    (defun ring-bell()
+      "Ring the terminal bell."
 
-   (defun confirm-exit-emacs ()
-     (interactive)
-     (if (y-or-n-p "Exit emacs? ")
-         (save-buffers-kill-emacs)
-       (beep)))
+      (interactive)
+      (beep)
+      (beep)
+      (beep))
 
 
-   ;;
-   ;; ----------------------------------------------------------------------
-   ;; Modify kill-buffer so that it deletes auto-save files
+    ;;
+    ;; ----------------------------------------------------------------------
+    ;; Confirm exit prior to exiting.
 
-   ;; (defun kill-buffer-and-delete-auto-save (buffer)
-   ;;   "Kill a buffer and remove any associated auto-save file."
-   ;;   (interactive "bKill buffer:  ")
-   ;;   (let ((filename nil))
-   ;;     (if (and buffer-auto-save-file-name (recent-auto-save-p))
-   ;;         (if (y-or-n-p "Delete autosave file? ")
-   ;;             (setq filename buffer-auto-save-file-name)))
-   ;;     (kill-buffer buffer)
-   ;;     (if (and filename (not (equal (buffer-name) buffer)))
-   ;;         (delete-file filename))))
-
-   (defun top-of-screen ()  (interactive) (move-to-window-line  0))
-   (defun bot-of-screen ()  (interactive) (move-to-window-line -1))
-
-   (defun where-am-i (pt)  (interactive "d")
-          (let*
-              ((mk (mark))
-               (rgn (if (or (eq pt mk) (null mk)) "" (count-lines-region pt mk))))
-            ;;
-            (message "   %s   Column %d    Character %d of %d    %s"
-                     (what-line) (1+ (current-column)) pt (point-max) rgn)))
-
-   (defun next-line (arg)  ;; eliminates eob insert of new line
-     (interactive "p")
-     (line-move arg)
-                                           ;  (next-line-internal arg)
-     nil)
-
-   (defun scroll-other-window-back () (interactive) (scroll-other-window -1))
-
-   (defun other-or-make-window (count) (interactive "p")
-          (if (one-window-p t) (split-window))
-          (other-window count))
-
-   (defun shorten-other-window (count) (interactive "p")
-          (if (not (one-window-p t)) (enlarge-window count)))
-
-   (defun narrow-other-window (count) (interactive "p")
-          (if (not (one-window-p t)) (enlarge-window-horizontally count)))
-
-   (defun overwrite-or-insert () (interactive)
-          (setq insert-mode overwrite-mode)
-          (overwrite-mode nil))
-
-   (defun label-last-kbd-macro (label)
-     "Bind macro to a key, F7 thru S10.
-        Apparent EMACS bug ignores non-error minibuffer I/O while macro runs."
-     (interactive "aEnter the label on a key from F7 to F10 (or S7 to S10): ")
-     (name-last-kbd-macro label)
-     (message "Key %s is now the same as typing \"%s\""
-              label (symbol-function label)))
-
-   (defun funcs-ctl-x-f-sorry () (interactive)
-          (beep) (message "No C-x f; use M-x set-fill-column; %d now." fill-column))
-
-   (defun funcs-ctl-w-sorry   () (interactive)
-          (beep) (message "No C-W; for kill-region, use 'C-Q C-W.'"))
-
-   ;; We note an undocumented but potentially useful technique:
-   ;; (defun exec (expr-string) (eval (car (read-from-string expr-string))))
+    (defun confirm-exit-emacs ()
+      (interactive)
+      (if (y-or-n-p "Exit emacs? ")
+          (save-buffers-kill-emacs)
+        (beep)))
 
 
-   (defun none () "Message only"  (interactive) (beep)
-          (message "Undefined Function Key; value %s"
-                   (key-description (this-command-keys))))
+    ;;
+    ;; ----------------------------------------------------------------------
+    ;; Modify kill-buffer so that it deletes auto-save files
 
-   (defun right-delimiter (key)
-     "Blink even in read-only files"
-     (interactive "p")
-     (if buffer-read-only
-         (progn
-           (forward-char)
-           (blink-matching-open))
-       (self-insert-command key)))
+    ;; (defun kill-buffer-and-delete-auto-save (buffer)
+    ;;   "Kill a buffer and remove any associated auto-save file."
+    ;;   (interactive "bKill buffer:  ")
+    ;;   (let ((filename nil))
+    ;;     (if (and buffer-auto-save-file-name (recent-auto-save-p))
+    ;;         (if (y-or-n-p "Delete autosave file? ")
+    ;;             (setq filename buffer-auto-save-file-name)))
+    ;;     (kill-buffer buffer)
+    ;;     (if (and filename (not (equal (buffer-name) buffer)))
+    ;;         (delete-file filename))))
 
-   (defun switch-to-number-shell-or-buffer-previous (arg)
-     (interactive "P")
-     (if (and arg (integerp arg))
-         (switch-shell arg)
-       (switch-to-buffer (other-buffer))))
+    (defun top-of-screen ()  (interactive) (move-to-window-line  0))
+    (defun bot-of-screen ()  (interactive) (move-to-window-line -1))
+
+    (defun where-am-i (pt)  (interactive "d")
+           (let*
+               ((mk (mark))
+                (rgn (if (or (eq pt mk) (null mk)) "" (count-lines-region pt mk))))
+             ;;
+             (message "   %s   Column %d    Character %d of %d    %s"
+                      (what-line) (1+ (current-column)) pt (point-max) rgn)))
+
+    ;;; eliminates eob insert of new line
+    (defun next-line (arg &optional unused)
+      (interactive "p")
+      (line-move arg)
+                                            ;  (next-line-internal arg)
+      nil)
+
+    (defun scroll-other-window-back () (interactive) (scroll-other-window -1))
+
+    (defun other-or-make-window (count) (interactive "p")
+           (if (one-window-p t) (split-window))
+           (other-window count))
+
+    (defun shorten-other-window (count) (interactive "p")
+           (if (not (one-window-p t)) (enlarge-window count)))
+
+    (defun narrow-other-window (count) (interactive "p")
+           (if (not (one-window-p t)) (enlarge-window-horizontally count)))
+
+    (defun overwrite-or-insert () (interactive)
+           (setq insert-mode overwrite-mode)
+           (overwrite-mode nil))
+
+    (defun label-last-kbd-macro (label)
+      "Bind macro to a key, F7 thru S10.
+         Apparent EMACS bug ignores non-error minibuffer I/O while macro runs."
+      (interactive "aEnter the label on a key from F7 to F10 (or S7 to S10): ")
+      (name-last-kbd-macro label)
+      (message "Key %s is now the same as typing \"%s\""
+               label (symbol-function label)))
+
+    (defun funcs-ctl-x-f-sorry () (interactive)
+           (beep) (message "No C-x f; use M-x set-fill-column; %d now." fill-column))
+
+    (defun funcs-ctl-w-sorry   () (interactive)
+           (beep) (message "No C-W; for kill-region, use 'C-Q C-W.'"))
+
+    ;; We note an undocumented but potentially useful technique:
+    ;; (defun exec (expr-string) (eval (car (read-from-string expr-string))))
 
 
-   (defun funcs-next-buffer ()
-     (interactive)
-     (let* ((first nil)
-            (starting-point (car (buffer-list)))
-            file-name)
-       (while (and (not first) (not (eq first starting-point)))
-         (bury-buffer)
-         (setq buffers (buffer-list))
-         (setq first (car buffers))
-         (setq file-name (buffer-file-name))
-         (if (and file-name
-                  (not (equal (file-name-nondirectory file-name) "RMAIL")))
-             ()
-           (setq first nil)))
-       (message (concat "File: " file-name "      [" (buffer-name first) "]"))))
+    (defun none () "Message only"  (interactive) (beep)
+           (message "Undefined Function Key; value %s"
+                    (key-description (this-command-keys))))
 
-   (defvar current-varying-number 0)
-   (defvar current-add-number 1)
+    (defun right-delimiter (key)
+      "Blink even in read-only files"
+      (interactive "p")
+      (if buffer-read-only
+          (progn
+            (forward-char)
+            (blink-matching-open))
+        (self-insert-command key)))
 
-   (defun add-varying-numbers (param)
-     (interactive "*P");
-     (if param
-         (setq current-varying-number param)
-       (insert (format add-varying-numbers-base-string current-varying-number))
-       (setq current-varying-number
-             (+ current-varying-number current-add-number))))
+    (defun switch-to-number-shell-or-buffer-previous (arg)
+      (interactive "P")
+      (if (and arg (integerp arg))
+          (switch-shell arg)
+        (switch-to-buffer (other-buffer))))
 
-   (setq add-varying-numbers-base-string "%d")
 
-   (defun set-current-add-number (fmt startnum)
-     (interactive "sFormat string: \nNIncrement number by how much each time? ")
-     (setq add-varying-numbers-base-string fmt)
-     (setq current-add-number startnum))
+    (defun funcs-next-buffer ()
+      (interactive)
+      (let* ((first nil)
+             (starting-point (car (buffer-list)))
+             file-name)
+        (while (and (not first) (not (eq first starting-point)))
+          (bury-buffer)
+          (setq buffers (buffer-list))
+          (setq first (car buffers))
+          (setq file-name (buffer-file-name))
+          (if (and file-name
+                   (not (equal (file-name-nondirectory file-name) "RMAIL")))
+              ()
+            (setq first nil)))
+        (message (concat "File: " file-name "      [" (buffer-name first) "]"))))
 
-   (defun set-fill-prefix-all-blanks ()
-     (interactive)
-     (setq fill-prefix (make-string (current-column) 32)))
+    (defvar current-varying-number 0)
+    (defvar current-add-number 1)
+
+    (defun add-varying-numbers (param)
+      (interactive "*P");
+      (if param
+          (setq current-varying-number param)
+        (insert (format add-varying-numbers-base-string current-varying-number))
+        (setq current-varying-number
+              (+ current-varying-number current-add-number))))
+
+    (setq add-varying-numbers-base-string "%d")
+
+    (defun set-current-add-number (fmt startnum)
+      (interactive "sFormat string: \nNIncrement number by how much each time? ")
+      (setq add-varying-numbers-base-string fmt)
+      (setq current-add-number startnum))
+
+    (defun set-fill-prefix-all-blanks ()
+      (interactive)
+      (setq fill-prefix (make-string (current-column) 32)))
    #+END_SRC
 
 ** c-stuff.el
@@ -2446,8 +2447,6 @@
         (setq Local-map-per-user (make-keymap))
         (define-key Local-map "l" Local-map-per-user)
 
-                                              ; Too confusing.  Force me to go into news or read-mail prior to sending.
-                                              ; (define-key Local-map "m" 'other-or-make-gnus-window)
 
         (define-key Local-map "s" '(lambda ()
                                      (interactive)
@@ -2498,6 +2497,21 @@
         (define-key Local-map "\M-%" 'query-replace-regexp)
         (define-key Local-map "\M-$" 'spell-buffer)
         (define-key Local-map "\M-\\" 'strip-leading-white-space)
+
+        (setq multiple-cursors-map (make-keymap))
+        (define-key multiple-cursors-map (kbd "a") 'mc/edit-lines)
+        (define-key multiple-cursors-map (kbd ">") 'mc/mark-next-like-this)
+        (define-key multiple-cursors-map (kbd ">") 'mc/mark-next-like-this)
+        (define-key multiple-cursors-map (kbd "<") 'mc/mark-previous-like-this)
+        (define-key multiple-cursors-map (kbd "=") 'mc/mark-all-like-this)
+        (define-key multiple-cursors-map (kbd "+") 'mc/mark-more-like-this-extended)
+
+        (define-key Local-map "m" multiple-cursors-map)
+
+
+        ;; windows-key+left-click adds a cursor
+        (global-unset-key (kbd "s-<down-mouse-1>"))
+        (global-set-key (kbd "s-<mouse-1>") 'mc/add-cursor-on-click)
         )
 
       (fset 'quit-command "\007")  ; Keyboard-quit doesn't quit in minibuffer
